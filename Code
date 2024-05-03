@@ -1,0 +1,119 @@
+import os
+import sys
+import subprocess
+import time
+import webbrowser
+import tkinter as tk
+import requests
+
+class AICoder:
+    def __init__(self, language):
+        self.language = language
+        self.user_instructions = ""
+        self.generated_code = ""
+        self.compiled_code = ""
+        self.executed_code = ""
+        self.gui = None
+        self.app = None
+
+    def generate_code(self, instructions):
+        # Your code generation logic here
+        return code
+
+    def compile_code(self, code):
+        # Your code compilation logic here
+        return compiled_code
+
+    def run_code(self, compiled_code):
+        # Your code execution logic here
+        return executed_code
+
+    def create_gui(self):
+        # Your GUI creation logic here
+        return gui
+
+    def transform_code_into_app(self, code):
+        # Your code-to-app transformation logic here
+        return app
+
+    def get_user_instructions(self):
+        # Your logic for reading user instructions here
+        self.user_instructions = self.window.get("1.0", "end-1c")
+
+    def generate_code_from_instructions(self):
+        # Your logic for generating code from user instructions here
+        self.generated_code = self.generate_code(self.user_instructions)
+
+    def compile_code_and_run(self):
+        # Your logic for compiling code here
+        self.compiled_code = self.compile_code(self.generated_code)
+
+        # Your logic for running compiled code here
+        self.executed_code = self.run_code(self.compiled_code)
+
+    def create_gui_and_transform_code(self):
+        # Your logic for creating GUI here
+        self.gui = self.create_gui()
+
+        # Your logic for transforming code into app here
+        self.app = self.transform_code_into_app(self.generated_code)
+
+    def open_app_in_browser(self):
+        # Your logic for opening the app in a browser here
+        webbrowser.open(self.app)
+
+    def create_gui(self):
+        self.window = tk.Tk()
+        self.window.title("AICoder")
+        self.window.geometry("600x400")
+
+        self.instructions_label = tk.Label(self.window, text="Enter your GitHub repository URL:")
+        self.instructions_label.pack()
+
+        self.instructions_text = tk.Entry(self.window, width=50)
+        self.instructions_text.pack()
+
+        self.download_data_button = tk.Button(self.window, text="Download Training Data", command=self.download_training_data)
+        self.download_data_button.pack()
+
+        self.generate_button = tk.Button(self.window, text="Generate Code", command=self.generate_code_from_instructions)
+        self.generate_button.pack()
+
+        self.compile_button = tk.Button(self.window, text="Compile and Run", command=self.compile_code_and_run)
+        self.compile_button.pack()
+
+        self.create_gui_button = tk.Button(self.window, text="Create GUI and Transform Code", command=self.create_gui_and_transform_code)
+        self.create_gui_button.pack()
+
+        self.open_app_button = tk.Button(self.window, text="Open App in Browser", command=self.open_app_in_browser)
+        self.open_app_button.pack()
+
+        self.window.mainloop()
+
+    def download_training_data(self):
+        github_url = self.instructions_text.get()
+        if not github_url.startswith("https://github.com"):
+            print("Invalid GitHub URL")
+            return
+
+        # Download the training data from Github
+        response = requests.get(github_url)
+        if response.status_code == 200:
+            with open("training_data.zip", "wb") as file:
+                file.write(response.content)
+            print("Training data downloaded successfully")
+        else:
+            print("Failed to download training data")
+
+def main():
+    if len(sys.argv) != 2:
+print("Usage: python aicoder.py <language>")
+        return
+
+    language = sys.argv[1]
+    aicoder = AICoder(language)
+
+    aicoder.create_gui()
+
+if __name__ == "__main__":
+    main()
